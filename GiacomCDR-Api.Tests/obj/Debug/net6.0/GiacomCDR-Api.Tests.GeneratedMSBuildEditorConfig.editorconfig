@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GiacomCDR_Api.Tests
-build_property.ProjectDir = C:\Users\sparry\Source\Repos\Giamcom\GiacomCDR-Api.Tests\
+build_property.ProjectDir = C:\Users\sparry\Source\Repos\Giamcom\GiamcomCDR-Api\GiacomCDR-Api.Tests\

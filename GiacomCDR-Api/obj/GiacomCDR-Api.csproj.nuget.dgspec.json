@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api\\GiacomCDR-Api.csproj": {}
+    "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api\\GiacomCDR-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api\\GiacomCDR-Api.csproj": {
+    "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api\\GiacomCDR-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api\\GiacomCDR-Api.csproj",
+        "projectUniqueName": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api\\GiacomCDR-Api.csproj",
         "projectName": "GiacomCDR-Api",
-        "projectPath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api\\GiacomCDR-Api.csproj",
+        "projectPath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api\\GiacomCDR-Api.csproj",
         "packagesPath": "C:\\Users\\sparry\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api\\obj\\",
+        "outputPath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

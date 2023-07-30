@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cAX2+mXMQj/+c5eMnRiYhdOPg7pMEDy1a59300z1G+gT4BrdTbQcCPt8/LRvsX3l8TdMUL7HcoZXyhhXSuTC5g==",
+  "dgSpecHash": "XNlL4R0Ry8iCcZ00qCIi00lWIlgbp6t3A7I8pXBeASDQfnNeX4AGyyU0A7fQHojYvS/XsiXFU6AQEmR3QGwUJQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiacomCDR-Api.Tests\\GiacomCDR-Api.Tests.csproj",
+  "projectFilePath": "C:\\Users\\sparry\\Source\\Repos\\Giamcom\\GiamcomCDR-Api\\GiacomCDR-Api.Tests\\GiacomCDR-Api.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sparry\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\sparry\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
