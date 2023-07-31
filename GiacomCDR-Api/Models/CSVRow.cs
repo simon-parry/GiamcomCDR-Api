@@ -5,16 +5,16 @@ namespace GiacomCDR_Api.Models
     public class CsvRow
     {
         [CsvHelper.Configuration.Attributes.Index(0)]
-        public string caller_id { get; set; }
+        public string caller_id { get; set; } = string.Empty;
 
         [CsvHelper.Configuration.Attributes.Index(1)]
-        public string recipient { get; set; }
+        public string recipient { get; set; } = string.Empty;
 
         [CsvHelper.Configuration.Attributes.Index(2)]
         public DateTime call_date { get; set; }
 
         [CsvHelper.Configuration.Attributes.Index(3)]
-        public string end_time { get; set; }
+        public string end_time { get; set; } = string.Empty;
 
         [CsvHelper.Configuration.Attributes.Index(4)]
         public int duration { get; set; }
@@ -23,10 +23,10 @@ namespace GiacomCDR_Api.Models
         public decimal cost { get; set; }
 
         [CsvHelper.Configuration.Attributes.Index(6)]
-        public string reference { get; set; }
+        public string reference { get; set; } = string.Empty;
 
         [CsvHelper.Configuration.Attributes.Index(7)]
-        public string currency { get; set; }
+        public string currency { get; set; } = string.Empty;
     }
 
     internal class CsvRowMap : ClassMap<CsvRow>

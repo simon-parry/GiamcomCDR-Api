@@ -54,7 +54,7 @@ namespace GiacomCDR_Api.Tests.Controllers
                     }
                 });
 
-            var result = _sut.GetCallRecords(string.Empty, string.Empty);
+            var result = _sut.GetCallRecords(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString());
             var okResult = result.Result as OkObjectResult;
 
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
@@ -69,95 +69,115 @@ namespace GiacomCDR_Api.Tests.Controllers
                 .Setup(m => m.Send(It.IsAny<GetCallRecordsCommand>(), It.IsAny<CancellationToken>()))
                 .Throws(new Exception());
 
-            Assert.ThrowsAsync<Exception>(() => _sut.GetCallRecords(string.Empty, string.Empty));
+            Assert.ThrowsAsync<Exception>(() => _sut.GetCallRecords(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString()));
             _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetTotalCostTest()
+        public void GetCallRecordsByCallerIdTest()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetCallerTotalsCommand>(), It.IsAny<CancellationToken>()))
-            //    .ReturnsAsync(new CommandResponse_Dec
-            //    {
-            //        Result = 3.34m
-            //    });
+            _mediatrMock
+               .Setup(m => m.Send(It.IsAny<GetCallRecordsByIdCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new CommandResponse<CallDetailRecord>
+               {
+                   Result = new List<CallDetailRecord>()
+                   {
+                        new CallDetailRecord()
+                        {
+                            Id = new Guid("6DCCECC1-A7DA-4A8E-9777-CF519415BDD5"),
+                            CallerId = "01214477497",
+                            Recipient = "07496934546",
+                            CallDate = DateTime.Now,
+                            EndTime = "14:21",
+                            Duration = 34,
+                            Cost = 0.34m,
+                            Reference = "12355"
+                        }
+                   }
+               });
 
-            //var result = _sut.GetTotalCost();
-            //var okResult = result.Result as OkObjectResult;
+            var result = _sut.GetCallRecordsByCallerId("01214477497");
+            var okResult = result.Result as OkObjectResult;
 
-            //Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-            //Assert.NotNull(result);
-            //_mediatrMock.Verify();
+            Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+            Assert.NotNull(result);
+            _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetTotalCostException()
+        public void GetCallRecordsByCallerIdException()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetCallerTotalsCommand>(), It.IsAny<CancellationToken>()))
-            //    .Throws(new Exception());
+            _mediatrMock
+                 .Setup(m => m.Send(It.IsAny<GetCallRecordsByIdCommand>(), It.IsAny<CancellationToken>()))
+                 .Throws(new Exception());
 
-            //Assert.ThrowsAsync<Exception>(() => _sut.GetTotalCost());
-            //_mediatrMock.Verify();
+            Assert.ThrowsAsync<Exception>(() => _sut.GetCallRecordsByCallerId("01214477497"));
+            _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetAverageCostTest()
+        public void GetCallerTotalsTest()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetAverageCostCommand>(), It.IsAny<CancellationToken>()))
-            //    .ReturnsAsync(new CommandResponse_Dec
-            //    {
-            //        Result = 0.71m
-            //    });
+            _mediatrMock
+                .Setup(m => m.Send(It.IsAny<GetCallerTotalsCommand>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new CommandResponseSingle<CallerTotals>
+                {
+                    Result =
+                        new CallerTotals()
+                        {
+                            CallerId = "01214477497",
+                            AverageCost = 0.34m,
+                            AverageDuration = 160,
+                            TotalCost = 5.67m
+                        }                  
+                });
 
-            //var result = _sut.GetAverageCost();
-            //var okResult = result.Result as OkObjectResult;
+            var result = _sut.GetCallerTotals("01214477497");
+            var okResult = result.Result as OkObjectResult;
 
-            //Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-            //Assert.NotNull(result);
-            //_mediatrMock.Verify();
+            Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+            Assert.NotNull(result);
+            _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetAverageCostException()
+        public void GetCallerTotalsException()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetAverageCostCommand>(), It.IsAny<CancellationToken>()))
-            //    .Throws(new Exception());
+            _mediatrMock
+                .Setup(m => m.Send(It.IsAny<GetCallerTotalsCommand>(), It.IsAny<CancellationToken>()))
+                .Throws(new Exception());
 
-            //Assert.ThrowsAsync<Exception>(() => _sut.GetAverageCost());
-            //_mediatrMock.Verify();
+            Assert.ThrowsAsync<Exception>(() => _sut.GetCallerTotals("01214477497"));
+            _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetAverageDurationTest()
+        public void DeleteCallRecordTest()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetCallRecordsByCallerIdCommand>(), It.IsAny<CancellationToken>()))
-            //    .ReturnsAsync(new CommandResponse_Dbl
-            //    {
-            //        Result = 64
-            //    });
+            _mediatrMock
+               .Setup(m => m.Send(It.IsAny<DeleteCallRecordCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new CommandResponse_Bool()
+               {
+                   Result = true
+               });
 
-            //var result = _sut.GetAverageDuration();
-            //var okResult = result.Result as OkObjectResult;
+            var result = _sut.DeleteCallRecord(new Guid("6DCCECC1-A7DA-4A8E-9777-CF519415BDD5"));
+            var okResult = result.Result as OkObjectResult;
 
-            //Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
-            //Assert.NotNull(result);
-            //_mediatrMock.Verify();
+            Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+            Assert.NotNull(result);
+            _mediatrMock.Verify();
         }
 
         [Fact]
-        public void GetAverageDurationException()
+        public void DeleteCallRecordException()
         {
-            //_mediatrMock
-            //    .Setup(m => m.Send(It.IsAny<GetCallRecordsByCallerIdCommand>(), It.IsAny<CancellationToken>()))
-            //    .Throws(new Exception());
+            _mediatrMock
+               .Setup(m => m.Send(It.IsAny<DeleteCallRecordCommand>(), It.IsAny<CancellationToken>()))
+               .Throws(new Exception());
 
-            //Assert.ThrowsAsync<Exception>(() => _sut.GetAverageDuration());
-            //_mediatrMock.Verify();
+            Assert.ThrowsAsync<Exception>(() => _sut.DeleteCallRecord(new Guid("6DCCECC1-A7DA-4A8E-9777-CF519415BDD5")));
+            _mediatrMock.Verify();
         }
     }
 }

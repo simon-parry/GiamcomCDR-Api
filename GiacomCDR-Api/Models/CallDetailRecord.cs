@@ -8,7 +8,7 @@ namespace GiacomCDR_Api.Models
         public string CallerId { get; set; } = string.Empty;
         public string Recipient { get; set; } = string.Empty;
         public DateTime CallDate { get; set; }      
-        public string EndTime { get; set; }   
+        public string EndTime { get; set; } = string.Empty;
         public int Duration { get; set; }   
         public decimal Cost { get; set; }
         public string Reference { get; set; } = string.Empty;  

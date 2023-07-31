@@ -37,13 +37,13 @@
             return entity;
         }
 
-        public async Task<TEntity> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             ArgumentNullException.ThrowIfNull(id);
             var itemToRemove = await GiacomDbContext.Set<TEntity>().FindAsync(id);
             GiacomDbContext.Remove(itemToRemove);
             await GiacomDbContext.SaveChangesAsync();
-            return itemToRemove;
+            return true;
         }
     }
 }

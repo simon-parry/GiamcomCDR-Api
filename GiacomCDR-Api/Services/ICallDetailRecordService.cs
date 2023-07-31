@@ -6,7 +6,7 @@ namespace GiacomCDR_Api.Services
     {
         IEnumerable<CallDetailRecord> GetCallRecords(DateTime startDate, DateTime endDate);
         IEnumerable<CallDetailRecord> GetCallRecordsByCallerId(string callerId);
-        void DeleteCallRecord(Guid id);
+        bool DeleteCallRecord(Guid id);
         bool ImportData(string FileName);
         CallerTotals GetCallerTotals(string caller_id);
     }

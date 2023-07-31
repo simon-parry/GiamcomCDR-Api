@@ -61,9 +61,9 @@ namespace GiacomCDR_Api.Services
             return _callDetailRecordRepository.GetAll().Where(x => x.CallerId == callerId).ToList();
         }
 
-        public void DeleteCallRecord(Guid id)
+        public bool DeleteCallRecord(Guid id)
         {
-            _callDetailRecordRepository.DeleteAsync(id);
+            return _callDetailRecordRepository.DeleteAsync(id).Result;
         }
         public CallerTotals GetCallerTotals(string caller_id)
         {

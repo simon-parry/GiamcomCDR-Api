@@ -7,6 +7,6 @@
         Task<TEntity> AddAsync(TEntity entity);
         void AddRange(IEnumerable<TEntity> entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task<TEntity> DeleteAsync(Guid id);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

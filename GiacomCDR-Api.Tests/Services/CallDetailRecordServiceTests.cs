@@ -2,6 +2,7 @@
 using GiacomCDR_Api.DataAccessLayer.TestData;
 using GiacomCDR_Api.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace GiacomCDR_Api.Tests.Services
 {
@@ -10,9 +11,9 @@ namespace GiacomCDR_Api.Tests.Services
 
         private readonly CallDetailRecordService _sut;
         private Guid _id;
-
         public CallDetailRecordServiceTests()
         {
+           
             var options = new DbContextOptionsBuilder<GiacomDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
@@ -32,6 +33,18 @@ namespace GiacomCDR_Api.Tests.Services
         }
 
         [Fact]
+        public Task ImportDataTest()
+        {
+            var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location.Substring(0, Assembly.GetEntryAssembly().Location.IndexOf("bin\\")));
+
+            path = path + "\\TestData\\giamcom.csv";
+            var result = _sut.ImportData(path);
+
+            Assert.True(result);
+            return Task.CompletedTask;
+        }
+
+        [Fact]
         public Task GetCallRecordsTest()
         {
             var result = _sut.GetCallRecords(DateTime.Parse("2023-06-16"), DateTime.Now);
@@ -41,31 +54,24 @@ namespace GiacomCDR_Api.Tests.Services
             return Task.CompletedTask;
         }
 
-        //[Fact]
-        //public Task GetTotalCallCostTest()
-        //{
-        //    var result = _sut.GetTotalCallCost();
+        [Fact]
+        public Task GetCallRecordsByCallerIdTest()
+        {
+            var result = _sut.GetCallRecordsByCallerId("01214477497");
 
-        //    Assert.Equal(1.82m, result);
-        //    return Task.CompletedTask;
-        //}
+            Assert.NotNull(result);
+            Assert.True(result.ToList().Count == 3);
+            return Task.CompletedTask;
+        }
 
-        //[Fact]
-        //public Task GetAverageDurationTest()
-        //{
-        //    var result = _sut.GetAverageDuration();
+        [Fact]
+        public Task DeleteCallRecordTest()
+        {
+            var id = new Guid("6DCCECC1-A7DA-4A8E-9777-CF519415BDD5");
+            var result = _sut.DeleteCallRecord(id);
 
-        //    Assert.Equal(93.66666666666667, result);
-        //    return Task.CompletedTask;
-        //}
-
-        //[Fact]
-        //public Task GetAverageCostTest()
-        //{
-        //    var result = _sut.GetAverageCost();
-
-        //    Assert.Equal(0.6066666666666666666666666667m, result);
-        //    return Task.CompletedTask;
-        //}
+            Assert.True(result);
+            return Task.CompletedTask;
+        }
     }
 }
