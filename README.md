@@ -1,3 +1,4 @@
+
 **GiacomCDR-Api**
 Api written in .NET6 with Visual Studio 2022, using a Code First approach
 
@@ -11,13 +12,14 @@ CQRS states that commands need to be separate from queries.  A method does one t
 Includes  Swagger api documentation 
 
 **Packages Used**
-CsvHelper Version="30.0.1" 
-MediatR Version="12.1.1"
-Microsoft.EntityFrameworkCore Version="7.0.9"
-Microsoft.EntityFrameworkCore.Sqlite Version="7.0.9"
-Microsoft.EntityFrameworkCore.Tools Version="7.0.9"
-Newtonsoft.Json Version="13.0.3"
-Swashbuckle.AspNetCore Version="6.5.0"
+
+ - CsvHelper Version="30.0.1" 
+ -  MediatR Version="12.1.1"
+ -  Microsoft.EntityFrameworkCore Version="7.0.9"
+ -  Microsoft.EntityFrameworkCore.Sqlite Version="7.0.9"  
+ -  Microsoft.EntityFrameworkCore.Tools Version="7.0.9" 
+ - Newtonsoft.Json Version="13.0.3" 
+ - Swashbuckle.AspNetCore Version="6.5.0"
 
 **Running the application**
 - pull the repo
@@ -32,7 +34,7 @@ Only a selection of unit tests have been added, this is just to give an idea, wa
 
 **Endpoints**
 
-***/api/CallDetailRecord/GetCallRecords****
+***/api/CallDetailRecord/GetCallRecords***
 
 parameters: startDate, endDate
 
@@ -57,18 +59,21 @@ paramters: callerId
 Deletes a call record off the database primary key
 
 ***/api/UploadFile/ImportData***
-Method Saves file first
-Imports Data
-Removes Uploaded File
+
+ - Method Saves file first 
+ - Imports Data 
+ - Removes Uploaded File
 
 Because files can be quite large, the api uses **streaming** via [MultipartReader] rather than using **buffering** via [IFormFile], which is more suited for larger files
 
-NOTE: The endpoint has been written to add the records in using Entity Framework. There may be speed issues with this depending on file size, possibly the file may need chunking before adding to the database or using a different approach to EF such as dapper. You could also make use of message queueing here when processing the file chunks which would minimise any loss of data when importing a file which may contain invalid records/data
+NOTE: The endpoint has been written to add the records in using Entity Framework. There may be speed issues with this depending on file size, possibly the file may need chunking before adding to the database or using a different approach to EF such as dapper. You could also make use of message queuing here when processing the file chunks which would minimise any loss of data when importing a file which may contain invalid records/data
 
 returns: fileSize
 
 Going forward:
-More work on custom exceptions, rather than a global one
-Finish missing Unit tests
-Data sanitisation for import file (valid phone numbers, duplicate entries)
-Add Logging (NLog ?)
+
+ - More work on custom exceptions, rather than a global one. 
+ - Finish missing Unit tests. 
+ - Data sanitisation for import file (valid phone
+   numbers, duplicate entries). 
+ - Add Logging (NLog ?).
